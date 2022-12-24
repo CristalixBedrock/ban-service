@@ -1,14 +1,18 @@
 const sql = require("./db.js");
 
 // constructor
-const Tutorial = function(tutorial) {
-  this.title = tutorial.title;
-  this.description = tutorial.description;
-  this.published = tutorial.published;
+const Bans = function (tutorial) {
+  this.player = tutorial.player;
+  this.reason = tutorial.reason;
+  this.ban_id = tutorial.ban_id;
+  this.banner = tutorial.banner;
+  this.active = tutorial.active;
+  this.banned_date = tutorial.banned_date;
+  this.ban_expiration = tutorial.ban_expiration;
 };
 
-Tutorial.create = (newTutorial, result) => {
-  sql.query("INSERT INTO tutorials SET ?", newTutorial, (err, res) => {
+Bans.create = (newTutorial, result) => {
+  sql.query("INSERT INTO bans SET ?", newTutorial, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -20,8 +24,8 @@ Tutorial.create = (newTutorial, result) => {
   });
 };
 
-Tutorial.findById = (id, result) => {
-  sql.query(`SELECT * FROM tutorials WHERE id = ${id}`, (err, res) => {
+Bans.findByNickname = (id, result) => {
+  sql.query("SELECT * FROM bans WHERE player='" + id + "'", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -39,11 +43,11 @@ Tutorial.findById = (id, result) => {
   });
 };
 
-Tutorial.getAll = (title, result) => {
-  let query = "SELECT * FROM tutorials";
+Bans.getAll = (title, result) => {
+  let query = "SELECT * FROM bans";
 
   if (title) {
-    query += ` WHERE title LIKE '%${title}%'`;
+    query += ` WHERE player LIKE '%${title}%'`;
   }
 
   sql.query(query, (err, res) => {
@@ -53,28 +57,28 @@ Tutorial.getAll = (title, result) => {
       return;
     }
 
-    console.log("tutorials: ", res);
+    console.log("bans: ", res);
     result(null, res);
   });
 };
 
-Tutorial.getAllPublished = result => {
-  sql.query("SELECT * FROM tutorials WHERE published=true", (err, res) => {
+Bans.getAllActive = result => {
+  sql.query("SELECT * FROM bans WHERE active=true", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("tutorials: ", res);
+    console.log("bans: ", res);
     result(null, res);
   });
 };
 
-Tutorial.updateById = (id, tutorial, result) => {
+Bans.updateByNickname = (player, tutorial, result) => {
   sql.query(
-    "UPDATE tutorials SET title = ?, description = ?, published = ? WHERE id = ?",
-    [tutorial.title, tutorial.description, tutorial.published, id],
+    "UPDATE bans SET player = ?, reason = ?, ban_id = ?, banner = ?, active = ?, banned_date = ?, ban_expiration = ? WHERE player = ?",
+    [tutorial.player, tutorial.reason, tutorial.ban_id, tutorial.banner, tutorial.active, tutorial.banned_date, tutorial.ban_expiration, player],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -88,14 +92,14 @@ Tutorial.updateById = (id, tutorial, result) => {
         return;
       }
 
-      console.log("updated tutorial: ", { id: id, ...tutorial });
-      result(null, { id: id, ...tutorial });
+      console.log("updated tutorial: ", { player: player, ...tutorial });
+      result(null, { player: player, ...tutorial });
     }
   );
 };
 
-Tutorial.remove = (id, result) => {
-  sql.query("DELETE FROM tutorials WHERE id = ?", id, (err, res) => {
+Bans.remove = (player, result) => {
+  sql.query("DELETE FROM bans WHERE player = ?", player, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -108,22 +112,22 @@ Tutorial.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted tutorial with id: ", id);
+    console.log("deleted tutorial with name: ", player);
     result(null, res);
   });
 };
 
-Tutorial.removeAll = result => {
-  sql.query("DELETE FROM tutorials", (err, res) => {
+Bans.removeAll = result => {
+  sql.query("DELETE FROM bans", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} tutorials`);
+    console.log(`deleted ${res.affectedRows} bans`);
     result(null, res);
   });
 };
 
-module.exports = Tutorial;
+module.exports = Bans;

@@ -10,10 +10,10 @@ module.exports = app => {
   router.get("/", tutorials.findAll);
 
   // Retrieve all published Tutorials
-  router.get("/published", tutorials.findAllPublished);
+  router.get("/active", tutorials.findAllPublished);
 
   // Retrieve a single Tutorial with id
-  router.get("/:id", tutorials.findOne);
+  router.get("/:player", tutorials.findOne);
 
   // Update a Tutorial with id
   router.put("/:id", tutorials.update);
@@ -24,5 +24,5 @@ module.exports = app => {
   // Delete all Tutorials
   router.delete("/", tutorials.deleteAll);
 
-  app.use('/api/tutorials', router);
+  app.use('/api/bans', router);
 };

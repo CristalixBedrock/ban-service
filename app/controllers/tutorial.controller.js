@@ -1,6 +1,6 @@
-const Tutorial = require("../models/tutorial.model.js");
+const Bans = require("../models/tutorial.model.js");
 
-// Create and Save a new Tutorial
+// Create and Save a new Bans
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -9,68 +9,72 @@ exports.create = (req, res) => {
     });
   }
 
-  // Create a Tutorial
-  const tutorial = new Tutorial({
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published || false
+  // Create a Bans
+  const tutorial = new Bans({
+    player: req.body.player,
+    reason: req.body.reason,
+    ban_id: req.body.ban_id,
+    banner: req.body.banner,
+    active: req.body.active || false,
+    banned_date: req.body.banned_date,
+    ban_expiration: req.body.ban_expiration
   });
 
-  // Save Tutorial in the database
-  Tutorial.create(tutorial, (err, data) => {
+  // Save Bans in the database
+  Bans.create(tutorial, (err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the Ban."
       });
     else res.send(data);
   });
 };
 
-// Retrieve all Tutorials from the database (with condition).
+// Retrieve all Banss from the database (with condition).
 exports.findAll = (req, res) => {
   const title = req.query.title;
 
-  Tutorial.getAll(title, (err, data) => {
+  Bans.getAll(title, (err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving bans."
       });
     else res.send(data);
   });
 };
 
-// Find a single Tutorial by Id
+// Find a single Bans by Id
 exports.findOne = (req, res) => {
-  Tutorial.findById(req.params.id, (err, data) => {
+  Bans.findByNickname(req.params.player, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Tutorial with id ${req.params.id}.`
+          message: `Not found Player with name ${req.params.player}.`
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Tutorial with id " + req.params.id
+          message: "Error retrieving Player with name " + req.params.player
         });
       }
     } else res.send(data);
   });
 };
 
-// find all published Tutorials
+// find all published Bans
 exports.findAllPublished = (req, res) => {
-  Tutorial.getAllPublished((err, data) => {
+  Bans.getAllActive((err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving players."
       });
     else res.send(data);
   });
 };
 
-// Update a Tutorial identified by the id in the request
+// Update a Bans identified by the id in the request
 exports.update = (req, res) => {
   // Validate Request
   if (!req.body) {
@@ -81,18 +85,18 @@ exports.update = (req, res) => {
 
   console.log(req.body);
 
-  Tutorial.updateById(
+  Bans.updateByNickname(
     req.params.id,
-    new Tutorial(req.body),
+    new Bans(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found Tutorial with id ${req.params.id}.`
+            message: `Not found Player with name ${req.params.id}.`
           });
         } else {
           res.status(500).send({
-            message: "Error updating Tutorial with id " + req.params.id
+            message: "Error updating Player with name " + req.params.id
           });
         }
       } else res.send(data);
@@ -100,31 +104,31 @@ exports.update = (req, res) => {
   );
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a Bans with the specified id in the request
 exports.delete = (req, res) => {
-  Tutorial.remove(req.params.id, (err, data) => {
+  Bans.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Tutorial with id ${req.params.id}.`
+          message: `Not found Player with name ${req.params.id}.`
         });
       } else {
         res.status(500).send({
-          message: "Could not delete Tutorial with id " + req.params.id
+          message: "Could not delete Player with name " + req.params.id
         });
       }
-    } else res.send({ message: `Tutorial was deleted successfully!` });
+    } else res.send({ message: `Player was deleted successfully!` });
   });
 };
 
-// Delete all Tutorials from the database.
+// Delete all Banss from the database.
 exports.deleteAll = (req, res) => {
-  Tutorial.removeAll((err, data) => {
+  Bans.removeAll((err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all tutorials."
+          err.message || "Some error occurred while removing all players."
       });
-    else res.send({ message: `All Tutorials were deleted successfully!` });
+    else res.send({ message: `All Players|Bans were deleted successfully!` });
   });
 };
