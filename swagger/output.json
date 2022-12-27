@@ -1,0 +1,327 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Cristalix",
+        "description": "Cristalix BAN|MUTE System",
+        "version": "1.0.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/api/bans/": {
+            "post": {
+                "tags": [
+                    "Bans"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Create new Ban",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of created ban",
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Bans"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Get All Bans",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of all bans",
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Bans"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Delete All Bans",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Deleted Text"
+                    }
+                }
+            }
+        },
+        "/api/bans/:player_name": {
+            "put": {
+                "tags": [
+                    "Bans"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Update Ban",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of updated ban",
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Bans"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Get needed Ban",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of needed ban",
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Bans"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Delete needed Ban",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Delete ban message"
+                    }
+                }
+            }
+        },
+        "/api/mutes/": {
+            "post": {
+                "tags": [
+                    "Mutes"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Create new Mute",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of created mute",
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Mutes"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Get All Bans",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of all mutes",
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Mutes"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Delete All Mutes",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Deleted Text"
+                    }
+                }
+            }
+        },
+        "/api/mutes/:player_name": {
+            "put": {
+                "tags": [
+                    "Mutes"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Update Mute",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of updated mute",
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Mutes"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Get needed mute",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of needed mute",
+                        "schema": {
+                            "$ref": "#/definitions/Bans"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Mutes"
+                ],
+                "consumes": [
+                    "application\/json"
+                ],
+                "produces": [
+                    "application\/json"
+                ],
+                "description": "Delete needed mute",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Delete mute message"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Bans": {
+            "type": "object",
+            "properties": {},
+            "required": [
+                "reason",
+                "player",
+                "ban_id",
+                "banner",
+                "active",
+                "banned_date",
+                "ban_expiration"
+            ],
+            "example": {
+                "player": "jack",
+                "reason": "loltest",
+                "ban_id": "ADCJWAD123",
+                "banner": "Nick",
+                "active": true,
+                "banned_date": "2019-22-12 23:20:01",
+                "ban-expiration": "2020-22-12 23:20:01"
+            }
+        }
+    }
+}
