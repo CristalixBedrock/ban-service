@@ -13,6 +13,11 @@ npm install
 node server.js
 ```
 
+### Docs
+```
+/api-doc
+```
+
 
 ### BANS
 ```
