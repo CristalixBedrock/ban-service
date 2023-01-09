@@ -10,7 +10,7 @@ npm install
 
 ### Run
 ```
-node server.js
+node server.js or 
 ```
 
 ### Docs
@@ -19,62 +19,28 @@ node server.js
 ```
 
 
-### BANS
+### Execute a SQL-funcction to create a database
 ```
-....POST /api/bans/ - Create(Параметры на скрине, если создано успешно, обратно возвращает экземпляр)
-```
+CREATE TABLE IF NOT EXISTS `bans` (
+id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+player varchar(255) NOT NULL,
+reason varchar(255),
+ban_id varchar(255) NOT NULL,
+banner varchar(255),
+active BOOLEAN DEFAULT false,
+banned_date timestamp NOT NULL,
+ban_expiration timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-```
-....GET /api/bans/:player_name - Получает экземпляр, если не найдено то выводится сообщение
-```
-
-```
-....PUT /api/bans/:player_name - Обновление(сначала получаешь экземпляр, меняешь где нужно и потом посылаешь запрос(как в POST -  Create структура)
-```
-
-```
-....DELETE /api/bans/:player_name - Удалить, нужен просто ник тут
-```
-
-```
-....GET /api/bans/ -   Получить все баны 
-```
-
-```
-....GET /api/bans/active -  Получить все активные баны
-```
-
-```
-....DELETE /api/bans/ - Удалить все записи в таблице
-```
-
-### MUTES
-
-```
-....POST /api/mutes/ - Create(Параметры на скрине, если создано успешно, обратно возвращает экземпляр)
-```
-
-```
-....GET /api/mutes/:player_name - Получает экземпляр, если не найдено то выводится сообщение
-```
-
-```
-....PUT /api/mutes/:player_name - Обновление(сначала получаешь экземпляр, меняешь где нужно и потом посылаешь запрос(как в POST - Create структура)
-```
-
-```
-....DELETE /api/mutes/:player_name - Удалить, нужен просто ник тут
-```
-
-```
-....GET /api/mutes/ - Получить все муты
-```
-```
-
-....GET /api/mutes/active - Получить все активные муты
-```
-
-```
-....DELETE /api/mutes/ - Удалить все записи в таблице
+CREATE TABLE IF NOT EXISTS `mutes` (
+id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+player varchar(255) NOT NULL,
+reason varchar(255),
+ban_id varchar(255) NOT NULL,
+banner varchar(255),
+active BOOLEAN DEFAULT false,
+banned_date timestamp NOT NULL,
+ban_expiration timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
